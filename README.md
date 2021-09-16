@@ -9,7 +9,7 @@ npm init
 
 ## Install npm dependencies
 ```
-npm install react react-dom react-scripts
+npm install react-scripts
 
 ```
 
