@@ -1,35 +1,30 @@
 # own-reactjs
 My simple own reactjs framework with vanilla js
 
-## Step 1: Setup project
-
-Initialise project with:
-
+## Initialise project with:
 ```
 npm init
 
 ```
 
-Install npm dependencies
-
+## Install npm dependencies
 ```
 npm install react react-dom react-scripts
 
 ```
 
-Run npm install
+## Run npm install
 ```
 npm install
 SKIP_PREFLIGHT_CHECK=true
 ```
 
-Add SKIP_PREFLIGHT_CHECK=true to .env.
+## Add SKIP_PREFLIGHT_CHECK=true to .env.
 ```
 echo "SKIP_PREFLIGHT_CHECK=true" >> .env
 ```
 
-Replace scripts section in "package.json" with:
-
+## Replace scripts section in "package.json" with:
 ```
 "scripts": {
     "start": "react-scripts start",
@@ -40,16 +35,14 @@ Replace scripts section in "package.json" with:
 
 ```
 
-Add files:
-
+## Add files:
 ```
 src/index.js
 public/index.html
 
 ```
 
-Add html to public/index.html:
-
+## Add html to public/index.html:
 ```
 <!DOCTYPE html>
 <html lang="en">
@@ -65,7 +58,7 @@ Add html to public/index.html:
 </html>
 ```
 
-Define the following cade in src/index.js:
+## Define the following code in src/index.js:
 
 ```
 const createElement = (type, props, ...children) => {
@@ -118,9 +111,7 @@ const container = document.getElementById('root');
 Own.render(element, container);
 
 
-```
-
-
+## Run app
 ```
 run npm start
 ```
