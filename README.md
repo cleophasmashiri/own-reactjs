@@ -109,7 +109,7 @@ const element = (
 );
 const container = document.getElementById('root');
 Own.render(element, container);
-
+```
 
 ## Run app
 ```
