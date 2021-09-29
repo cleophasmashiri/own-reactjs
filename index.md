@@ -1,37 +1,122 @@
-## Welcome to GitHub Pages
+# own-reactjs
+My simple own reactjs framework with vanilla js
 
-You can use the [editor on GitHub](https://github.com/cleophasmashiri/own-reactjs/edit/gh-pages/index.md) to maintain and preview the content for your website in Markdown files.
+## Initialise project with:
+```
+npm init
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
-
-### Markdown
-
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
-
-```markdown
-Syntax highlighted code block
-
-# Header 1
-## Header 2
-### Header 3
-
-- Bulleted
-- List
-
-1. Numbered
-2. List
-
-**Bold** and _Italic_ and `Code` text
-
-[Link](url) and ![Image](src)
 ```
 
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
+## Install npm dependencies
+```
+npm install react-scripts
 
-### Jekyll Themes
+```
 
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/cleophasmashiri/own-reactjs/settings/pages). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
+## Run npm install
+```
+npm install
+SKIP_PREFLIGHT_CHECK=true
+```
 
-### Support or Contact
+## Add SKIP_PREFLIGHT_CHECK=true to .env.
+```
+echo "SKIP_PREFLIGHT_CHECK=true" >> .env
+```
 
-Having trouble with Pages? Check out our [documentation](https://docs.github.com/categories/github-pages-basics/) or [contact support](https://support.github.com/contact) and we’ll help you sort it out.
+## Replace scripts section in "package.json" with:
+```
+"scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
+  },
+
+```
+
+## Add files:
+```
+src/index.js
+public/index.html
+
+```
+
+## Add html to public/index.html:
+```
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="root"></div>
+</body>
+</html>
+```
+
+## Define the following code in src/index.js:
+
+```
+const createElement = (type, props, ...children) => {
+  return {
+    type,
+    props: {
+      ...props,
+      children: children.map(child =>
+        typeof child === 'object'? child: createTextElement(child) 
+      )
+    }
+  }
+};
+
+const createTextElement = (text) => {
+  return {
+    type: 'TEXT_ELEMENT',
+    props: {
+      nodeValue: text
+      children: []
+    }
+  }
+};
+
+const render = (element, container) => {
+  const node = element.type === 'TEXT_ELEMENT'?
+  document.createTextNode(''): document.createElement(element.type);
+  Object.keys(element.props)
+  .filter(k => k !== 'children')
+  .forEach(name => {
+    node[name] = element[name];
+  });
+  element.props.children.forEach(child => render(child, node));
+  container.appendChild(node);
+};
+
+const Own = {
+  createElement,
+  render
+}
+
+/** @jsx Own.createElement */
+const element = (
+    <div class="container">
+        <h1>Hello Own React</h1>
+        <p>Such a basic react like framework</p>
+    </div>
+);
+const container = document.getElementById('root');
+Own.render(element, container);
+
+
+## Run app
+```
+run npm start
+```
+
+
+
+
+
